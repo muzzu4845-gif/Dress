@@ -77,7 +77,11 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`STYLEHUB Backend server running on port ${PORT}`);
-  console.log(`API endpoints accessible at http://localhost:${PORT}/api/`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`STYLEHUB Backend server running on port ${PORT}`);
+    console.log(`API endpoints accessible at http://localhost:${PORT}/api/`);
+  });
+}
+
+export default app;

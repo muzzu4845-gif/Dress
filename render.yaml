@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: stylehub-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        value: rzp_test_STYLEHUB2026DEMO
+      - key: RAZORPAY_KEY_SECRET
+        value: STYLEHUB_RZP_SECRET_2026_TEST

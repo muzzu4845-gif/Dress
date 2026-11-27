@@ -45,6 +45,15 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+  } catch (err) {
+    console.error('Database connection error in request:', err);
+  }
+  next();
+});
+
 app.get('/', (req, res) => {
   res.json({
     success: true,

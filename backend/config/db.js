@@ -14,7 +14,10 @@ const connectDB = async () => {
     return;
   }
 
-  const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/stylehub';
+  const uri = process.env.MONGO_URI;
+  if (!uri) {
+    return;
+  }
 
   try {
     const conn = await mongoose.connect(uri, {
@@ -24,7 +27,6 @@ const connectDB = async () => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`Error connecting to MongoDB: ${error.message}`);
-    // Do not call process.exit(1) so serverless functions don't crash
   }
 };
 

@@ -75,6 +75,19 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.get('/api/test-db', (req, res) => {
+  const hasMongoUri = Boolean(process.env.MONGO_URI);
+  const isAtlas = process.env.MONGO_URI ? process.env.MONGO_URI.includes('mongodb+srv') : false;
+  const readyState = mongoose.connection.readyState;
+  const states = ['Disconnected', 'Connected', 'Connecting', 'Disconnecting'];
+  res.json({
+    hasMongoUri,
+    isAtlas,
+    dbStatus: states[readyState] || 'Unknown',
+    readyState
+  });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);

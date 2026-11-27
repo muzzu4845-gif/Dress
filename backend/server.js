@@ -43,6 +43,18 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'STYLEHUB Fashion E-Commerce Backend is Online!',
+    endpoints: {
+      health: '/api/health',
+      products: '/api/products',
+      auth: '/api/auth'
+    }
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
